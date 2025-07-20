@@ -1,9 +1,9 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.UUID;
 
 public class Client{
-	private final int id;
+	private final UUID id;
 	private String first_name;
 	private String last_name;
 	private final LocalDate birth;
@@ -11,7 +11,7 @@ public class Client{
 	private String password;
 	private String addres;
 	
-	private static ArrayList<Integer> used_ids;
+	private static ArrayList<UUID> used_ids;
 	
 	public Client(
 		String first_name, 
@@ -21,7 +21,9 @@ public class Client{
 		String password,
 		String addres)
 	{
-		this.id = generate_id();
+		this.id = UUID.randomUUID();
+		used_ids.add(this.id);
+		
 		this.first_name = first_name;
 		this.last_name = last_name;
 		this.birth = format_birth(birth);
@@ -30,7 +32,7 @@ public class Client{
 		this.addres = addres;
 	}
 	
-	public int get_id(){
+	public UUID get_id(){
 		return this.id;
 	}
 	
@@ -77,21 +79,11 @@ public class Client{
 	public String get_addres(){
 		return this.addres;
 	}
-	
-	private static int generate_id(){
-		Random random = new Random();
-		int random_id;
-		
-		do{
-			random_id = random.nextInt();
-		}while(used_ids != null && used_ids.contains(random_id));
-		
-		used_ids.add(random_id);
-		return random_id;
-	}
-	
+
 	private static LocalDate format_birth(String birth){
 		LocalDate dob = LocalDate.parse(birth);
 		return dob;
 	}
+	
+	//TODO implementar calculo da idade baseado na data de aniversário
 }
