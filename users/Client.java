@@ -86,7 +86,7 @@ public class Client{
 	}
 	
 	//TODO implementar calculo da idade baseado na data de aniversário
-	public static int calculate_age(LocalDate birth){
+	public int calculate_age(LocalDate birth){
 		LocalDate today = LocalDate.now();
 		int age = today.getYear() - birth.getYear();
 		if (today.getMonthValue() < birth.getMonthValue() || 
